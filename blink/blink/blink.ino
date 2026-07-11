@@ -1,11 +1,21 @@
+// Initial Start of Sequence 
 const int initialSeq = 1;
 
+
+// Red Pin Variables
 const int redPin = 13;
-const int greenPin = 8;
-const int bluePin = 2;
 const int redSeq = 5;
+const int redDelay = 300;
+
+// Green Pin Variable
+const int greenPin = 8;
 const int greenSeq = 10;
+const int greenDelay = 100;
+
+// Blue Pin Variable
+const int bluePin = 2;
 const int blueSeq = 15;
+const int blueDelay = 200;
 
 struct PinPlacement {
   const int pincolor;
@@ -14,9 +24,9 @@ struct PinPlacement {
 };
 
 PinPlacement myPins[] = {
-  {redPin, redSeq, 300},
-  {greenPin, greenSeq, 200},
-  {bluePin, blueSeq, 100}
+  {redPin, redSeq, redDelay},
+  {greenPin, greenSeq, greenDelay},
+  {bluePin, blueSeq, blueDelay}
 };
 
 const int pinSize = sizeof(myPins) / sizeof(myPins[0]);
