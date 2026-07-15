@@ -1,24 +1,27 @@
 // Initial Start of Sequence 
 
-const int off = 0;
-const int on = 1;
-
 const int baseBinary = 2;
 const int binaryLimit = 4;
+const int lastBit = pow(2,4);
 
 const int PositionOne = 11;
-const int degreeOne = 0;
-
 const int PositionTwo = 10;
-const int degreeTwo = 1;
-
 const int PositionThree = 9;
-const int degreeThree = 2;
-
 const int PositionFour = 8;
-const int degreeFour = 3;
 
 const int initialDelay = 1000;
+
+struct PinPlacement {
+  const int pinseq;
+  const int pinposition;
+};
+
+PinPlacement myPins[] = {
+  {0, PositionOne},
+  {1, PositionTwo},
+  {2, PositionThree},
+  {3, PositionFour}
+};
 
 void setup() {
   pinMode(PositionOne, OUTPUT);
@@ -27,20 +30,36 @@ void setup() {
   pinMode(PositionFour, OUTPUT);
 };
 
+void flashBitRep(int number) {
+  for (int i = binaryLimit; i >= 0; i--) {
+    int bit = (number >> i) & 1;
+    digitalWrite(myPins[i].pinposition, bit);
+  };
+  delay(initialDelay);
+}
+
+
+
 
 void loop() {
-    digitalWrite(PositionOne, HIGH);
-    delay(initialDelay);
-    digitalWrite(PositionOne, LOW);
-    digitalWrite(PositionTwo, HIGH);
-    delay(initialDelay);
-    digitalWrite(PositionOne, HIGH);
-    delay(initialDelay);
-    digitalWrite(PositionOne, LOW);
-    digitalWrite(PositionTwo, LOW);
-    digitalWrite(PositionThree, HIGH);
+    
+    for (int number = 0; number < lastBit; number++){
+      digitalWrite(PositionOne, LOW);
+      digitalWrite(PositionTwo, LOW);
+      digitalWrite(PositionThree, LOW);
+      digitalWrite(PositionFour, LOW);
+      delay(initialDelay);
+      flashBitRep(number);
+    };
+
 };
 
+
+
+// 3 2 1 0 
+// 0 0 0 0 - i = 0 [0]
+// 0 0 0 1 - i = 1 [1]
+// 0 0 1 0 - i = 2 [1, 1]
 // 0000 - 0
 // 0001 - 1
 // 0010 - 2
